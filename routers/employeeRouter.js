@@ -7,24 +7,24 @@ const multer = require("multer");
 const path = require("path");
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, "uploads");
-    },
-    filename: (req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-  });
-  
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
 const upload = multer({ storage });
-  
-  // Serve static files from the 'uploads' directory
+
+// Serve static files from the 'uploads' directory
 router.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // ----------------------- routers -------------------------------------------------------
 /* CREATE EMPLOYEE  */
 router.post("/createEmployee", 
-    validator.createEmployeeValidator, 
-    // upload.fields([{ name: "employeeImage", maxCount: 1 }]), 
+    upload.single('profileImage'), 
+    validator.createEmployeeValidator,
     employeeController.createEmployee
 );
 // http://localhost:3443/api/V1/employee/createEmployee

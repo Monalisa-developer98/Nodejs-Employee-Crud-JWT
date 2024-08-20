@@ -34,6 +34,10 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    profileImage: {
+        type: String,
+        default: null,
+    },
     department: {
         type: String,
         default: null

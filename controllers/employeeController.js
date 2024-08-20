@@ -5,7 +5,7 @@ const messages = require('../constants/constMessages');
 /// create employee
 const createEmployee = async (req, res) => {
     try{
-        const result = await employeeService.createEmployee(req.body);
+        const result = await employeeService.createEmployee(req.body, req.file);
         console.log(result);
         if(result?.isDuplicateEmail){
             return Responses.failResponse(req, res, null, messages.duplicateEmail, 200);

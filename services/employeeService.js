@@ -3,7 +3,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 const { generateHashPassword } = require('../helpers/commonHelper')
 
 // create Employee
-const createEmployee = async(data) =>{
+const createEmployee = async(data, file) =>{
     const emailDetails = await checkDuplicateEmail(data.email);
     if(emailDetails){
         return {isDuplicateEmail: true};
@@ -17,7 +17,8 @@ const createEmployee = async(data) =>{
             password: hashedPassword,
             role: data.role,
             designation: data.designation,
-            department: data.department
+            department: data.department,
+            profileImage: file ? file.path : null
         }
         const empData = new Employee(inputData);
         const result = await empData.save();
