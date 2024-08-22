@@ -26,13 +26,19 @@ const createEmployee = async(data, file) =>{
     }
    return false; 
 }
+//queries a database collection (likely using Mongoose or a similar ORM for MongoDB) to check if an employee with a specific email address and an active status (isActive: 1) exists.
 const checkDuplicateEmail = async(email) =>{
     const employee = await Employee.findOne(
-        { email, isActive:true }, 
-        { _id: 1, email: 1, name: 1, isActive: 1 }
+        { email, isActive:true },  // Query: Find a document with the given email and isActive = 1
+        { _id: 1, email: 1, name: 1, isActive: 1 } // Projection: Only return these fields
     );
     return employee;
 }
+
+//If an employee with the given email and isActive status of 1 exists, the function returns the document with the specified fields (_id, name, email, and isActive).
+// If no such employee exists, the function returns null.
+
+
 
 // view Single Employee
 const viewSingleEmployee = async(id) => {

@@ -16,8 +16,8 @@ const createEmployeeValidator = async (req, res, next) => {
                 'any.required': 'Password is a required field'
             }) ,
             role: Joi.string(),
-            designation: Joi.string(),
-            department: Joi.string()     
+            designation: Joi.string().optional(),
+            department: Joi.string().optional()     
           });
 
           await bodySchema.validateAsync(req.body);
