@@ -42,7 +42,8 @@ const checkDuplicateEmail = async(email) =>{
 
 // view Single Employee
 const viewSingleEmployee = async(id) => {
-    const singleEmployeDetails = await Employee.findById({ _id: id });
+    const Id = new ObjectId(id);
+    const singleEmployeDetails = await Employee.findById({ _id: Id });
     console.log("Single Employee Details: -----", singleEmployeDetails);
     return singleEmployeDetails;
 }
